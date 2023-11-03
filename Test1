@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <input type="text" id="taskInput" placeholder="Enter a new task">
+  <button id="addTask">Add</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    // Get references to HTML elements
+    const taskInput = document.getElementById('taskInput');
+    const addTaskButton = document.getElementById('addTask');
+    const taskList = document.getElementById('taskList');
+
+    // Function to add a new task
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = taskText;
+
+        // Add a click event listener to mark tasks as done
+        taskItem.addEventListener('click', function() {
+          taskItem.classList.toggle('done');
+        });
+
+        taskList.appendChild(taskItem);
+        taskInput.value = '';
+      }
+    }
+
+    // Add a click event listener to the "Add" button
+    addTaskButton.addEventListener('click', addTask);
+
+    // Add a keypress event listener to the input field
+    taskInput.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
